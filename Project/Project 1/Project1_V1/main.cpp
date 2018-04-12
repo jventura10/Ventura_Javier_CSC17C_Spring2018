@@ -30,7 +30,8 @@ int main(int argc, char** argv) {
     bool quit=false;    //Boolean to keep Menu Running
     int import;         //Import Option to Read in General Poker Rules
     float pot=1.0f;     //Total Betting Pot in Bitcoin
-    float bet;          //Bet for a round, subtracted or added back to pot
+    float bet=0.0f;     //Bet for a round, subtracted or added back to pot
+    char opt;           //Option to Fold,Match, or Raise
     
     do{
         cout<<"5 Card Draw Poker!"<<endl;
@@ -60,12 +61,53 @@ int main(int argc, char** argv) {
                 char card3=rand()%52+1;
                 char card4=rand()%52+1;
                 char card5=rand()%52+1;
+                int swap1,swap2,swap3;
+                
+                while(card1==card2 || card1==card3 || card1==card4 || card1==card5){
+                    card1=rand()%52+1;
+                }
+                while(card2==card3 || card2==card4 || card2==card5){
+                    card2=rand()%52+1;
+                }
+                while(card3==card4 || card3==card5){
+                    card3=rand()%52+1;
+                }
+                while(card4==card5){
+                    card4=rand()%52+1;
+                }
                 
                 cout<<face(card1)<<suit(card1)<<" "<<face(card2)<<suit(card2)
                     <<" "<<face(card3)<<suit(card3)<<" "<<face(card4)<<suit(card4)
                     <<" "<<face(card5)<<suit(card5)<<endl;
                 
+                cout<<endl;
+                cout<<"Fold (F), Match(M) 0.5 Bitcoin, Raise(R): ";
+                cin>>opt;
                 
+                //Possible Outcomes from Folding,Matching, and Betting
+                if(opt=='F'){
+                    cout<<endl;
+                    cout<<"Folded..."<<endl;
+                    break;
+                }
+                else if(opt=='M'){
+                    cout<<endl;
+                    cout<<"Matched 0.5 Bitcoin"<<endl;
+                    bet=0.5f;
+                }
+                else{
+                    cout<<endl;
+                    cout<<"Raise bet: ";
+                    cin>>bet;
+                    
+                    while(bet<=0.5){
+                        cout<<"Raise must be higher than 0.5 minimum: ";
+                        cin>>bet;
+                    }
+                }
+                
+                
+                               
                 cout<<endl;
                 break;
             }
