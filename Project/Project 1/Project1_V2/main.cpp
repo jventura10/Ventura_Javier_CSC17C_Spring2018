@@ -1,8 +1,8 @@
 /*
  * File:   main.cpp
  * Author: Javier Ventura 
- * Purpose: CSC 17C Project 1 Poker Game Version 1 is Procedural Programming Style
- *          to get the game running
+ * Purpose: CSC 17C Project 1 Poker Game Version 2 is Starting to use Object 
+ *          Oriented Programming Style
  * Created on April 11, 2018, 3:24 PM
  */
 
