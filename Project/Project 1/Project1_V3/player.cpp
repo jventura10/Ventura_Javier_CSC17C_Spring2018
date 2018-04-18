@@ -7,6 +7,9 @@
 
 //Libraries
 #include <iostream>
+#include <string>
+#include <map>
+#include <cstdlib>
 
 //User Libraries
 #include "player.h"
@@ -14,40 +17,50 @@
 using namespace std;
 
 Player::Player(){
+    //Set Pot to Default 2.0 Bitcoin
     pot=2.0f;
-    card1=rand()%52+1;
     
-    while(card1==card2 || card1==card3 || card1==card4 || card1==card5){
-        card1=rand()%52+1;
+    name="Username";
+    
+    //Fill Hand with 5 random keys to the deck integers from 1-52
+    hand[0]=rand()%52+1;
+    
+    hand[1]=rand()%52+1;
+    
+    while(hand[1]==hand[0]){
+        hand[1]=rand()%52+1;
     }
     
-    card2=rand()%52+1;
+    hand[2]=rand()%52+1;
     
-    while(card2==card3 || card2==card4 || card2==card5){
-        card2=rand()%52+1;
+    while(hand[2]==hand[1] || hand[2]==hand[0]){
+        hand[2]=rand()%52+1;
     }
     
-    card3=rand()%52+1;
+    hand[3]=rand()%52+1;
     
-    while(card3==card4 || card3==card5){
-        card3=rand()%52+1;
+    for(int i=0;i<3;i++){    
+        if(hand[3]==hand[i]){
+            hand[3]=rand()%52+1;
+        }
     }
     
-    card4=rand()%52+1;
-    
-    while(card4==card5){
-        card4=rand()%52+1;
+    hand[4]=rand()%52+1;
+    for(int i=0;i<4;i++){
+        if(hand[4]==hand[i]){
+            hand[4]=rand()%52+1;
+        }
     }
     
-    card5=rand()%52+1;
+    buildDeck();
     
 }
 
 void Player::showCards(){
     cout<<endl;
-    cout<<face(card1)<<suit(card1)<<" "<<face(card2)<<suit(card2)
-        <<" "<<face(card3)<<suit(card3)<<" "<<face(card4)<<suit(card4)
-        <<" "<<face(card5)<<suit(card5)<<endl;
+    cout<<name<<"'s Cards: "<<endl;
+    cout<<cards[hand[0]]<<" "<<cards[hand[1]]<<" "<<cards[hand[2]]<<" "<<cards[hand[3]]
+        <<" "<<cards[hand[4]]<<endl;
 }
 
 char Player::face(char card){
@@ -94,6 +107,70 @@ char Player::face(char card){
     }
 }
 
+void Player::buildDeck(){
+    //Map to hold Deck of Cards
+    
+    //Spades
+    cards[1]="AS";
+    cards[2]="2S";
+    cards[3]="3S";
+    cards[4]="4S";
+    cards[5]="5S";
+    cards[6]="6S";
+    cards[7]="7S";
+    cards[8]="8S";
+    cards[9]="9S";
+    cards[10]="TS";
+    cards[11]="JS";
+    cards[12]="QS";
+    cards[13]="KS";
+    
+    //Clubs
+    cards[14]="AC";
+    cards[15]="2C";
+    cards[16]="3C";
+    cards[17]="4C";
+    cards[18]="5C";
+    cards[19]="6C";
+    cards[20]="7C";
+    cards[21]="8C";
+    cards[22]="9C";
+    cards[23]="TC";
+    cards[24]="JC";
+    cards[25]="QC";
+    cards[26]="KC";
+    
+    //Diamonds
+    cards[27]="AD";
+    cards[28]="2D";
+    cards[29]="3D";
+    cards[30]="4D";
+    cards[31]="5D";
+    cards[32]="6D";
+    cards[33]="7D";
+    cards[34]="8D";
+    cards[35]="9D";
+    cards[36]="TD";
+    cards[37]="JD";
+    cards[38]="QD";
+    cards[39]="KD";
+    
+    //Hearts
+    cards[40]="AH";
+    cards[41]="2H";
+    cards[42]="3H";
+    cards[43]="4H";
+    cards[44]="5H";
+    cards[45]="6H";
+    cards[46]="7H";
+    cards[47]="8H";
+    cards[48]="9H";
+    cards[49]="TH";
+    cards[50]="JH";
+    cards[51]="QH";
+    cards[52]="KH";
+}
+
 char Player::suit(char card){
     if(card<=13){
         return 'S';
@@ -107,6 +184,12 @@ char Player::suit(char card){
     else{
         return 'D';
     }
+}
+
+void Player::setName(){
+    cout<<endl;
+    cout<<"Enter Username: ";
+    cin>>name;
 }
 
 void Player::setbet1(){
@@ -189,6 +272,7 @@ void Player::swap(){
 
     if(nSwaps==0){
         cout<<endl;
+        cout<<"No Swaps!"<<endl;
     }
     else if(nSwaps==1){
         cout<<endl;
@@ -202,39 +286,39 @@ void Player::swap(){
         }
 
         if(swap1==1){
-            card1=rand()%52+1;
+            hand[0]=rand()%52+1;
 
-            while(card1==card2 || card1==card3 || card1==card4 || card1==card5){
-                card1=rand()%52+1;
+            while(hand[0]==hand[1] || hand[0]==hand[2] || hand[0]==hand[3] || hand[0]==hand[4]){
+                hand[0]=rand()%52+1;
             }
 
         }
         else if(swap1==2){
-            card2=rand()%52+1;
+            hand[1]=rand()%52+1;
 
-            while(card2==card1 || card2==card3 || card2==card4 || card2==card5){
-                card1=rand()%52+1;
+            while(hand[1]==hand[0] || hand[1]==hand[2] || hand[1]==hand[3] || hand[1]==hand[4]){
+                hand[0]=rand()%52+1;
             }
         }
         else if(swap1==3){
-            card3=rand()%52+1;
+            hand[2]=rand()%52+1;
 
-            while(card3==card1 || card3==card2 || card3==card4 || card3==card5){
-                card3=rand()%52+1;
+            while(hand[2]==hand[0] || hand[2]==hand[1] || hand[2]==hand[3] || hand[2]==hand[4]){
+                hand[2]=rand()%52+1;
             }
         }
         else if(swap1==4){
-            card4=rand()%52+1;
+            hand[3]=rand()%52+1;
 
-            while(card4==card1 || card4==card3 || card4==card2 || card2==card5){
-                card1=rand()%52+1;
+            while(hand[3]==hand[0] || hand[3]==hand[2] || hand[3]==hand[1] || hand[1]==hand[4]){
+                hand[0]=rand()%52+1;
             }
         }
         else if(swap1==5){
-            card5=rand()%52+1;
+            hand[4]=rand()%52+1;
 
-            while(card5==card1 || card5==card3 || card5==card2 || card5==card4){
-                card5=rand()%52+1;
+            while(hand[4]==hand[0] || hand[4]==hand[2] || hand[4]==hand[1] || hand[4]==hand[3]){
+                hand[4]=rand()%52+1;
             }
         }
 
@@ -256,38 +340,38 @@ void Player::swap(){
         }
 
         if(swap1==1 || swap2==1){
-            card1=rand()%52+1;
+            hand[0]=rand()%52+1;
 
-            while(card1==card2 || card1==card3 || card1==card4 || card1==card5){
-                card1=rand()%52+1;
+            while(hand[0]==hand[1] || hand[0]==hand[2] || hand[0]==hand[3] || hand[0]==hand[4]){
+                hand[0]=rand()%52+1;
             }
         }
         if(swap1==2 || swap2==2){
-            card2=rand()%52+1;
+            hand[1]=rand()%52+1;
 
-            while(card2==card1 || card2==card3 || card2==card4 || card2==card5){
-                card1=rand()%52+1;
+            while(hand[1]==hand[0] || hand[1]==hand[2] || hand[1]==hand[3] || hand[1]==hand[4]){
+                hand[0]=rand()%52+1;
             }
         }
         if(swap1==3 ||swap2==3){
-            card3=rand()%52+1;
+            hand[2]=rand()%52+1;
 
-            while(card3==card1 || card3==card2 || card3==card4 || card3==card5){
-                card3=rand()%52+1;
+            while(hand[2]==hand[0] || hand[2]==hand[1] || hand[2]==hand[3] || hand[2]==hand[4]){
+                hand[2]=rand()%52+1;
             }
         }
         if(swap1==4 || swap2==4){
-            card4=rand()%52+1;
+            hand[3]=rand()%52+1;
 
-            while(card4==card1 || card4==card3 || card4==card2 || card2==card5){
-                card1=rand()%52+1;
+            while(hand[3]==hand[0] || hand[3]==hand[2] || hand[3]==hand[1] || hand[1]==hand[4]){
+                hand[0]=rand()%52+1;
             }
         }
         if(swap1==5 || swap2==5){
-            card5=rand()%52+1;
+            hand[4]=rand()%52+1;
 
-            while(card5==card1 || card5==card3 || card5==card2 || card5==card4){
-                card5=rand()%52+1;
+            while(hand[4]==hand[0] || hand[4]==hand[2] || hand[4]==hand[1] || hand[4]==hand[3]){
+                hand[4]=rand()%52+1;
             }
         }
     }
@@ -313,38 +397,38 @@ void Player::swap(){
         }
 
         if(swap1==1 || swap2==1 || swap3==1){
-            card1=rand()%52+1;
+            hand[0]=rand()%52+1;
 
-            while(card1==card2 || card1==card3 || card1==card4 || card1==card5){
-                card1=rand()%52+1;
+            while(hand[0]==hand[1] || hand[0]==hand[2] || hand[0]==hand[3] || hand[0]==hand[4]){
+                hand[0]=rand()%52+1;
             }
         }
         if(swap1==2 || swap2==2 || swap3==2){
-            card2=rand()%52+1;
+            hand[1]=rand()%52+1;
 
-            while(card2==card1 || card2==card3 || card2==card4 || card2==card5){
-                card1=rand()%52+1;
+            while(hand[1]==hand[0] || hand[1]==hand[2] || hand[1]==hand[3] || hand[1]==hand[4]){
+                hand[0]=rand()%52+1;
             }
         }
         if(swap1==3 ||swap2==3 || swap3==3){
-            card3=rand()%52+1;
+            hand[2]=rand()%52+1;
 
-            while(card3==card1 || card3==card2 || card3==card4 || card3==card5){
-                card3=rand()%52+1;
+            while(hand[2]==hand[0] || hand[2]==hand[1] || hand[2]==hand[3] || hand[2]==hand[4]){
+                hand[2]=rand()%52+1;
             }
         }
         if(swap1==4 || swap2==4 || swap3==4){
-            card4=rand()%52+1;
+            hand[3]=rand()%52+1;
 
-            while(card4==card1 || card4==card3 || card4==card2 || card2==card5){
-                card1=rand()%52+1;
+            while(hand[3]==hand[0] || hand[3]==hand[2] || hand[3]==hand[1] || hand[1]==hand[4]){
+                hand[0]=rand()%52+1;
             }
         }
         if(swap1==5 || swap2==5 || swap3==5){
-            card5=rand()%52+1;
+            hand[4]=rand()%52+1;
 
-            while(card5==card1 || card5==card3 || card5==card2 || card5==card4){
-                card5=rand()%52+1;
+            while(hand[4]==hand[0] || hand[4]==hand[2] || hand[4]==hand[1] || hand[4]==hand[3]){
+                hand[4]=rand()%52+1;
             }
         }
     }

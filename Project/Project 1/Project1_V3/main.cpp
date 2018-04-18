@@ -1,8 +1,8 @@
 /*
  * File:   main.cpp
  * Author: Javier Ventura 
- * Purpose: CSC 17C Project 1 Poker Game Version 2 is Starting to use Object 
- *          Oriented Programming Style
+ * Purpose: CSC 17C Project 1 Poker Game Version 3 is Starting to use Object 
+ *          Concepts from STL 
  * Created on April 11, 2018, 3:24 PM
  */
 
@@ -10,6 +10,8 @@
 #include <cstdlib>      //C Standard Library
 #include <iostream>     //Input & Output Library
 #include <ctime>        //C Time Library
+#include <map>
+#include <set>
 #include <fstream>      //File Stream Library 
 #include <string>
 
@@ -39,12 +41,14 @@ int main(int argc, char** argv) {
         cout<<"(3) Beginner's Guide To Poker"<<endl;
         cout<<"(4) Poker Hands Ranking"<<endl;
         cout<<"(5) Add Bitcoin to your Betting Pot"<<endl;
-        cout<<"(6) Quit Game"<<endl;
+        cout<<"(6) Change Username"<<endl;
+        cout<<"(7) Quit Game"<<endl;
+        
         cout<<endl;
         cout<<"Enter Option: ";
         cin>>choice;
         
-        while(choice<1 || choice>6){
+        while(choice<1 || choice>7){
             cout<<endl;
             cout<<"Enter Valid Option: ";
             cin>>choice;
@@ -64,7 +68,6 @@ int main(int argc, char** argv) {
                 user.swap();
                 
                 user.showCards();
-                
                 user.setbet2();
                 
                 if(user.getbet2()<=0){
@@ -146,6 +149,9 @@ int main(int argc, char** argv) {
                 break;
             }
             case 6:{
+                user.setName();
+            }
+            case 7:{
                 cout<<endl;
                 cout<<"Quitting Game... :("<<endl;
                 return 0;
