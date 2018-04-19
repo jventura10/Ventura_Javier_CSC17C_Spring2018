@@ -33,6 +33,10 @@ int main(int argc, char** argv) {
     Player user;        //User Object for PLayer
     Enemy opp1;         //Opponent 1 in the table
     Enemy opp2;         //Opponent 2 in the table
+    //Set Venues for the Betting Minimums
+    multiset<string> venues{
+        "London","Las Vegas","Monte Carlo","Mexico City","Sao Paulo","Naples"
+    };
     
     do{
         cout<<"5 Card Draw Poker!"<<endl;
