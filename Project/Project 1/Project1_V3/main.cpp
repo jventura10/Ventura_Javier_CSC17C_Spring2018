@@ -15,12 +15,11 @@
 #include <fstream>      //File Stream Library 
 #include <string>
 
+//User Libraries
+#include "enemy.h"
 #include "player.h"       //String Library
 
-//User Libraries
-
 using namespace std;
-
 
 int main(int argc, char** argv) {
     //Set Random Number Seed
@@ -31,7 +30,9 @@ int main(int argc, char** argv) {
     bool quit=false;    //Boolean to keep Menu Running
     int import;         //Import Option to Read in General Poker Rules
     char opt;           //Option to Fold,Match, or Raise
-    Player user;
+    Player user;        //User Object for PLayer
+    Enemy opp1;         //Opponent 1 in the table
+    Enemy opp2;         //Opponent 2 in the table
     
     do{
         cout<<"5 Card Draw Poker!"<<endl;
@@ -74,7 +75,22 @@ int main(int argc, char** argv) {
                     break;
                 }
                 
-                user.rank();
+                user.setPts();
+                opp1.setPts();
+                opp2.setPts();
+                
+                if(user.getPts()>opp1.getPts() && user.getPts()>opp2.getPts()){
+                    cout<<endl;
+                    cout<<"You Won!"<<endl;
+                    user.win();
+                    cout<<endl;
+                }
+                else{
+                    cout<<endl;
+                    cout<<"You Lost!"<<endl;
+                    user.lose();
+                    cout<<endl;
+                }
                 
                 cout<<endl;
                 break;
@@ -83,13 +99,14 @@ int main(int argc, char** argv) {
                 cout<<endl;
                 cout<<"Rules of the Game (5 Card Draw Poker):"<<endl;
                 cout<<"Each player will receive 5 (hole) cards"<<endl;
+                cout << "T =Ten Q=Queen J=Jack K=King A=Ace S=Spades C=Clubs D=Diamonds H=Hearts";
                 cout<<"Each player may fold, raise the bet or match the bet"<<endl;
                 cout<<"Each player may ask for up to three changes in cards"<<endl;
                 cout<<"Another betting round will occur"<<endl;
                 cout<<"There is no limit to betting, as long as you have the bet in your pot"<<endl;
-                cout<<"New Players are given 1 Bitcoin to start off"<<endl;
+                cout<<"New Players are given 2 Bitcoin to start off"<<endl;
                 cout<<"Winner is based on Poker Hands (See Option 4)"<<endl;
-                cout<<"***Complete Guide See option 3***"<<endl;
+                cout<<"***Complete Poker Guide See option 3***"<<endl;
                 cout<<endl;
                 break;
             }

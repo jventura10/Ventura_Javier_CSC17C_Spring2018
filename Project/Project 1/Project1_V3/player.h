@@ -27,6 +27,11 @@ class Player{
         int nSwaps;
         char opt;
         string name;
+        int pts;
+        struct Wins{
+            bool win;
+            Wins *linkWins;
+        };
     public:
         Player();
         ~Player();
@@ -40,7 +45,10 @@ class Player{
         void setbet2();
         float getbet2();
         void swap();
-        void rank();
+        void setPts();
+        int getPts();
+        void win();
+        void lose();
         void addCoin();
 };
 

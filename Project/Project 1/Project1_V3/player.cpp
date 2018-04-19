@@ -242,6 +242,7 @@ void Player::setbet2(){
         cout<<endl;
         cout<<"Matched Last Bet"<<endl;
         bet2=bet1;
+        cout<<endl;
     }
     else{
         cout<<endl;
@@ -252,6 +253,7 @@ void Player::setbet2(){
             cout<<"Raise must be higher than last bet: ";
             cin>>bet2;
         }
+        
     }
 }
 
@@ -434,21 +436,51 @@ void Player::swap(){
     }
 }
 
-void Player::rank(){
-    int win=rand()%100+1;
-                
-    if(win>=0 && win<=40){
-        cout<<endl;
-        cout<<"You Won!"<<endl;
-        pot=pot+(3*bet1)+(3*bet2);
+void Player::setPts(){
+    //Give pts based on cards 
+    int x1=hand[0]%13;
+    int x2=hand[1]%13;
+    int x3=hand[2]%13;
+    int x4=hand[3]%13;
+    int x5=hand[4]%13;
+    
+    //Pairs
+    if(x1==x2){
+        pts=pts+1;
     }
-    else{
-        cout<<endl;
-        cout<<"You Lost!"<<endl;
-        pot=(pot-bet1)-bet2;
+    if(x1==x3){
+        pts=pts+1;
     }
+    if(x1==x4){
+        pts=pts+1;
+    }
+    if(x1==x5){
+        pts=pts+1;
+    }
+    if(x2==x3){
+        pts=pts+1;
+    }
+    if(x2==x4){
+        pts=pts+1;
+    }
+    if(x2==x5){
+        pts=pts+1;
+    }
+    if(x3==x4){
+        pts=pts+1;
+    }
+    if(x3==x5){
+        pts=pts+1;
+    }
+    if(x4==x5){
+        pts=pts+1;
+    }
+    
 }
 
+int Player::getPts(){
+    return pts;
+}
 void Player::addCoin(){
     //Declare Local Variables
     float temp;         //Temporary Variable to add to pot
@@ -463,6 +495,17 @@ void Player::addCoin(){
     }
 
     pot=pot+temp;
+}
+void Player::win(){
+    pot=pot+(2*bet1)+(2*bet2);
+    cout<<endl;
+    cout<<"Pot: "<<pot<<" Bitcoin";
+}
+
+void Player::lose(){
+    cout<<endl;
+    pot=pot-bet1-bet2;
+    cout<<"Pot: "<<pot<<" Bitcoin";
 }
 
 Player::~Player(){
