@@ -38,10 +38,10 @@ int main(int argc, char** argv) {
 
     for(int i=0;i<50000;i++){
         for(int i=0;i<SIZE;i++){
-        if(a[i]=="tlkqpwoeirutiouryuih"){
-            cout<<"Found"<<endl;
+            if(a[i]=="tlkqpwoeirutiouryuih"){
+                cout<<"Found"<<endl;
+            }
         }
-    }
     }
     
     

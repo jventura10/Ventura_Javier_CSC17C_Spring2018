@@ -40,6 +40,7 @@ int main(int argc, char** argv) {
     a[19]="tlkqpwoeirutiouryuih";
     
     for(int i=0;i<50000;i++){
+        found=false;
         do{
             int mid=(min+max)/2;
 

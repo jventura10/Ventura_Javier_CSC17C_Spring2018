@@ -20,7 +20,6 @@ private:
 public:
     Hash(int j);
     void insert(string word);
-    void dltItm(string word);
     int hshFunc(string word);
     void dsply();
 };
