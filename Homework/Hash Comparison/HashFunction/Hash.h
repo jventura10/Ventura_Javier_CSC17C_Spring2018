@@ -9,20 +9,19 @@
 #define HASH_H
 
 #include <list>
-
+#include <string>
+#include <iostream>
 using namespace std;
 
 class Hash{
 private:
     int chains;
-    list<int> *table;
+    list<string> *table;
 public:
     Hash(int j);
-    void insert(int key);
-    void dltItm(int key);
-    int hshFunc(int x){
-        return (x%chains);
-    }
+    void insert(string word);
+    void dltItm(string word);
+    int hshFunc(string word);
     void dsply();
 };
 
